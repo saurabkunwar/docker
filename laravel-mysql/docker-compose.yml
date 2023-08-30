@@ -1,0 +1,29 @@
+version: "3.3"
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+    volumes:
+      - laravel_volume:/var/www/html/laravel-10-blog/storage 
+
+  mysql_db:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "laravel_10_blog"
+      MYSQL_PASSWORD: "password"
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+volumes:
+  laravel_volume:
+  mysql_volume:
+
